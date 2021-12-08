@@ -76,7 +76,7 @@ System windows 指的就是屏幕上status bar、 navigation bar等系统控件�
 
 `navigation drawer`就是一个例子，它需要充满整个屏幕，绘制在透明的status bar下面。
 
-![enter image description here](http://7othru.com1.z0.glb.clouddn.com/why-would-i-want-to-fitssystemwindows.png)
+![](https://miro.medium.com/max/1400/0*hPTqjUnIXVhm7gYQ.png)
 
 如上图所示，`DrawerLayout`使用了`fitsSystemwindows`，他需要让它的子View依旧保持默认行为，即不被actionbar或其他system window遮住，同时依照Material Design的定义，又需要在透明的statusbar下面进行绘制（默认是你在theme中设置的`colorPrimaryDark`颜色）
 
