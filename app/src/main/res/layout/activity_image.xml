@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/image"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.myfitwindowsystems.ImageActivity">
+
+<!--    fitsSystemWindows  默认 =  false
+ 当  android:fitsSystemWindows="false" 时，"hello world!"会合状态栏重叠。
+ 当 android:fitsSystemWindows="true"时，"hello world!"不会合状态栏重叠。
+fitsSystemWindows 只有设置在跟布局生效，
+fitsSystemWindows 生效后， RelativeLayout的背景图片时正常的，
+
+ TextView 距离顶部有个 padding
+
+ -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hello world!" />
+</RelativeLayout>
