@@ -35,7 +35,7 @@ android:fitsSystemWindows="true"
 
 
 我们为什么要用fitsSystemWindows?
----
+-----
 
 > * 原文链接 : [Why would I want to fitsSystemWindows?](https://medium.com/google-developers/why-would-i-want-to-fitssystemwindows-4e26d9ce1eec)
 * 原文作者 : [Ian Lake](https://medium.com/@ianhlake)
@@ -93,3 +93,68 @@ System windows 指的就是屏幕上status bar、 navigation bar等系统控件�
 有一件事需要始终牢记，这个属性毕竟不是`fitsStatusBar`或者`fitsNavigationBar`。不管是尺寸还是位置，在不同版本间，系统控件都有很大的差距。
 
 但是尽管放心，无论在什么平台上，`fitsSystemWindows`都会影响`Insets`，使你的content和system ui不会重叠——除非你自定义这一行为。
+
+
+--------
+
+### Android中fitsSystemWindows总结
+
+**属性说明**：fitsSystemWindows让添加了该属性的View可以根据窗口来调整View的布局位置，就是要考虑系统的窗口的位置。
+
+**使用条件**：第一：只有当系统设置为了透明状态（透明状态栏和透明导航栏）或者去掉系统自带的标题栏的是时候才管用。
+
+​ 第二：android版本必须是在 Android4.4及以上的系统，因为4.4以下的系统StatusBar没有透明状态。
+
+android:fitsSystemWindows=“true”：根据窗口自动调整View布局位置
+
+#### Android隐藏和设置透明窗口的几种方式
+
+最近这边项目中是将标题栏隐藏掉，在滑动布局中加入了该属性，
+
+**方式一（代码实现）**（这里介绍去掉标题栏）
+
+当我们需要对某一个Activity或者Fragment需要隐藏掉系统自带的窗口的时候，我们可以在代码中实现
+
+**在需要去除的类，注意：onCreate（）方法中，setContentView（R.layout.main）之前加入：**
+
+**去掉标题栏**：requestWindowFeature(Window.FEATURE\_NO\_TITLE)
+
+**去掉状态栏**：getWindow().setFlags(WindowManager.LayoutParams.FLAG\_FULLSCREEN, WindowManager.LayoutParams.FLAG\_FULLSCREEN);
+
+注意：有时候用\*\*requestWindowFeature(Window.FEATURE\_NO\_TITLE)\*\*去掉标题栏的时候没有反应
+
+解决方式有两种：
+
+一：创建的activity默认继承了AppComxxxxxActivity,把这个改成Activity
+
+二：在onCreate中加入这句：
+
+```
+if (getSupportActionBar() != null){
+    getSupportActionBar().hide();
+}
+
+```
+
+**方式二：AndroidManifest**
+
+在AndroidManifest中设置属性
+
+```
+android:theme="@style/AppTheme"
+
+```
+
+在style.xml定义：
+
+```xml
+<style name="Theme.AppCompat.NoActionBar">
+         <item name="windowActionBar">false</item>
+         //隐藏标题栏
+         <item name="windowNoTitle">true</item>
+         //隐藏状态栏
+         <item name="android:windowFullscreen">true</item>
+          //透明状态栏
+         <item name="android:windowTranslucentStatus">true</item>
+</style>
+```
